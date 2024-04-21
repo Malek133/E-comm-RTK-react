@@ -15,17 +15,17 @@
  */
 
 export const productValidation = (product: { title: string; 
-    des: string; imageUrl: string; price: string }) => {
+    des: string; thumbnail: string; price: string }) => {
 
-    const errors: { title: string; des: string; imageUrl: string; 
+    const errors: { title: string; des: string; thumbnail: string; 
         price: string } = {
       title: "",
       des: "",
-      imageUrl: "",
+      thumbnail: "",
       price: "",
     };
   
-    const validUrl = /^(ftp|http|https):\/\/[^ "]+$/.test(product.imageUrl);
+    const validUrl = /^(ftp|http|https):\/\/[^ "]+$/.test(product.thumbnail);
   
     if (!product.title || !product.title.trim() || product.title.length < 3 || product.title.length > 60) {
       errors.title = "Product title must be between 3 and 60 characters!";
@@ -34,8 +34,8 @@ export const productValidation = (product: { title: string;
       errors.des = "Product description must be between 10 and 900 characters!";
     }
   
-    if (!product.imageUrl || !product.imageUrl.trim() || !validUrl) {
-      errors.imageUrl = "Valid image URL is required";
+    if (!product.thumbnail || !product.thumbnail.trim() || !validUrl) {
+      errors.thumbnail = "Valid image URL is required";
     }
   
     if (!product.price || !product.price.trim() || isNaN(Number(product.price))) {

@@ -12,7 +12,7 @@ interface IProps {
    setProductToEdit:( product:IProduct) => void
    openEditModal:() => void
    setProductToEditIdx : (value:number) => void
-  idx:number
+   idx:number
    openConfirmModal: () => void
   
 }
@@ -24,7 +24,7 @@ const ProdsDashboard = ({product,setProductToEdit,openEditModal,idx
   const onEdit = () =>{
     setProductToEdit(product)
     openEditModal()
-    setProductToEditIdx(idx)
+     setProductToEditIdx(idx)
   }
 
   

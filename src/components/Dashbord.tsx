@@ -10,19 +10,25 @@ import { productValidation } from './validation'
 import { v4 as uuid } from "uuid";
 import { ProductNameTypes } from './types'
 import ProdsDashboard from './ProdsDashboard'
+import { useGetProductListQuery } from '../Redux/features/products/CreateAsyncThunkE'
 
 
 function HomeDashboard() {
-  const ObjPro:IProduct = { title: "",des: "", imageUrl: "", price: "",quantity:0 }
+  const ObjPro:IProduct = { title: "",des: "", thumbnail: "", 
+  price: "",quantity:0 }
   const [product,setProduct] = useState<IProduct>( ObjPro);
-  const [productss,setProductss] = useState<IProduct[]>(Products);
+   const [productss,setProductss] = useState<IProduct[]>(Products);
   const [productToEditIdx, setProductToEditIdx] = useState<number>(0);
   const [productToEdit, setProductToEdit] = useState<IProduct>(ObjPro);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);  
   const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
   const [errors,setErrors] = useState({  title: "", 
-  des: "", imageUrl: "", price: "" });
-  const [isOpen, setIsOpen] = useState(false)
+  des: "", thumbnail: "", price: "" });
+  const [isOpen, setIsOpen] = useState(false);
+
+  const {isLoading,data} = useGetProductListQuery();
+
+ if(isLoading)  return <h1>Loading...</h1>
 
   const closeModal= () => {setIsOpen(false)}
   const openModal= () => {setIsOpen(true)}
@@ -64,11 +70,11 @@ function HomeDashboard() {
     FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const { title, des,
-       price, imageUrl } = product;
+       price, thumbnail } = product;
 
     const errors = productValidation({
       title, des,
-       price, imageUrl
+       price, thumbnail
     });
     
     const hasErrorMsg =
@@ -91,10 +97,10 @@ function HomeDashboard() {
   const submitEditHandler = (e:FormEvent<HTMLFormElement>): void => {
     e.preventDefault(); 
     const { title, des,
-      price, imageUrl } = productToEdit;
+      price, thumbnail } = productToEdit;
 
    const errors = productValidation({
-     title, des,price, imageUrl,});
+     title, des,price, thumbnail,});
   
    const hasErrorMsg =Object.values(errors).some(value => value === "") && 
    Object.values(errors).every(value => value === "");
@@ -114,7 +120,7 @@ setProductss(updateProducts)
      // FIN EDIT PRODUCT
 
   //Renders
- const RenderProductList = productss.map((product,idx) =>(
+ const RenderProductList =  data.products.map((product:IProduct,idx:number) =>(
   <ProdsDashboard key={product.id} product={product} 
   openEditModal={openEditModal}
   setProductToEdit={setProductToEdit} idx={idx}
@@ -208,7 +214,7 @@ setProductss(updateProducts)
           <div className='m-5 flex flex-col space-y-4'>
           {renderProductEditWithErrorMsg("title", "Product Title", "title")}
 {renderProductEditWithErrorMsg("des", "Product Des", "des")}
- {renderProductEditWithErrorMsg("imageUrl", "Product Image URL", "imageUrl")}
+ {renderProductEditWithErrorMsg("thumbnail", "Product Image URL", "thumbnail")}
   {renderProductEditWithErrorMsg("price", "Product Price", "price")}
           </div>
         
