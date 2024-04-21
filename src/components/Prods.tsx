@@ -21,13 +21,14 @@ const Prods = ({product}:IProps) => {
        <div className='border-2 border-gray-300 rounded' 
     key={product.id}>
       <Image className='container p-5 mb-4 ml-5 rounded h-72 w-72' 
-      imageURL={product.imageUrl} alt={product.title} />
+      imageURL={product.thumbnail} alt={product.title} />
 
       <div className='flex justify-between items-center my-1 mx-3'>
         <div className='text-center text-xl font-bold'>
           {product.title}</div>
-      <div className='text-center text-3xl font-bold'>
-        <span className='text-red-800'>{product.price}</span> $</div>
+      <div className='flex justify-center items-center space-x-1 text-center text-xl font-bold'>
+        <span className='text-red-800'>{product.price}</span> 
+        $</div>
       </div>
       
       <div>

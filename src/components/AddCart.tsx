@@ -13,7 +13,7 @@ const AddCart = () => {
     <div className='border-2 border-gray-300 rounded w-fit' 
       key={productt.id}>
    <img className='container p-5 mb-4 rounded h-80 w-96' 
-   src={productt.imageUrl} alt={productt.title} />
+   src={productt.thumbnail} alt={productt.title} />
 
    <div className=' my-1 mx-3'>
      <div className='text-center text-xl font-bold'>

@@ -42,7 +42,7 @@ const ProdsDashboard = ({product,setProductToEdit,openEditModal,idx
        <div className='border-2 border-gray-300 rounded' 
     key={product.id}>
       <Image className='container p-5 mb-4 rounded h-80 w-96' 
-      imageURL={product.imageUrl} alt={product.title} />
+      imageURL={product.thumbnail} alt={product.title} />
 
       <div className='flex justify-between items-center my-1 mx-3'>
         <div className='text-center text-xl font-bold'>

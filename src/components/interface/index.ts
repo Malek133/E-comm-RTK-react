@@ -4,7 +4,7 @@ export interface IProduct {
     id?:string | undefined,
       title:string ,
       des:string,
-      imageUrl:string ,
+      thumbnail:string ,
       price:string 
       quantity:number
 }
